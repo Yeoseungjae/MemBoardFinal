@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icia.memboardfinal.dao.BDAO">
+    <insert id="bWrite" parameterType="board">
+        INSERT INTO MBFBOARD VALUES(BTB_SEQ.NEXTVAL, #{bWriter}, #{bTitle}, #{bContent}, SYSDATE, 0, #{bFileName})
+    </insert>
+
+    <select id="bList" resultType="board">
+        SELECT * FROM MBFBOARD ORDER BY BNO DESC
+    </select>
+
+    <select id="bView" parameterType="int" resultType="board">
+        SELECT * FROM MBFBOARD WHERE BNO=#{bNo}
+    </select>
+
+    <update id="bCount" parameterType="int">
+        UPDATE MBFBOARD SET BHIT = BHIT+1 WHERE BNO=#{bNo}
+    </update>
+
+    <update id="bModify" parameterType="board">
+        UPDATE MBFBOARD SET BWRITER=#{bWriter}, BTITLE=#{bTitle}, BCONTENT=#{bContent}, BFILENAME=#{bFileName} WHERE BNO=#{bNo}
+    </update>
+
+    <delete id="bDelete" parameterType="int">
+        DELETE FROM MBFBOARD WHERE BNO=#{bNo}
+    </delete>
+
+    <select id="bsWriter" parameterType="String" resultType="board">
+        SELECT * FROM MBFBOARD WHERE BWRITER LIKE '%'||#{keyword}||'%' ORDER BY BNO DESC
+    </select>
+
+    <select id="bsTitle" parameterType="String" resultType="board">
+        SELECT * FROM MBFBOARD WHERE BTITLE LIKE '%'||#{keyword}||'%' ORDER BY BNO DESC
+    </select>
+
+    <select id="bsContent" parameterType="String" resultType="board">
+        SELECT * FROM MBFBOARD WHERE BCONTENT LIKE '%'||#{keyword}||'%' ORDER BY BNO DESC
+    </select>
+
+    <select id="cList" parameterType="int" resultType="comment">
+        SELECT * FROM MBFCOMMENT WHERE CBNO=#{CBNo} ORDER BY CNO DESC
+    </select>
+
+    <insert id="cWrite" parameterType="comment">
+        INSERT INTO MBFCOMMENT VALUES(CMT_SEQ.NEXTVAL, #{CBNo}, #{CWriter}, #{CContent})
+    </insert>
+
+    <delete id="cDelete" parameterType="comment">
+        DELETE FROM MBFCOMMENT WHERE CNO=#{CNo}
+    </delete>
+</mapper>

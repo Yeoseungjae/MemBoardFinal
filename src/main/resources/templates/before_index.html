@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE-edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="SEUNGJAE"/>
+    <meta name="description" content="MEMBOARD프로젝트 index페이지">
+    <title>MEMBOARD_Index</title>
+</head>
+<body>
+<button onclick="location.href='joinForm'"  th:if="${session.loginId eq null}">회원가입</button>
+<button onclick="location.href='loginForm'" th:if="${session.loginId eq null}">로그인</button>
+<button onclick="location.href='writeForm'" th:if="${session.loginId ne null}">글 작성</button>
+<button onclick="location.href='bList'">글 목록</button>
+<button onclick="location.href='mList'">회원 목록</button>
+<button onclick="location.href='logout'" th:if="${session.loginId ne null}">로그 아웃</button>
+<p th:if="${session.loginId ne null}" th:text="${session.loginId}+ '님 환영합니다!'"></p>
+</body>
+</html>
